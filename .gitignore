@@ -1,0 +1,5 @@
+.fibs/
+.vscode/
+CMakeLists.txt
+CMakePresets.json
+
