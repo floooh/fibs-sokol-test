@@ -30,7 +30,7 @@ export const project: fibs.ProjectDesc = {
   // We need to tell the sokol headers what 3D backend to use, and the
   // sokol shader compiler the output shader language. One convenient
   // way to do this is to 'patch' existing build config templates
-  // with new information.)
+  // with new information.
   configs: [
     // all build configs derived from the 'macos' template will use the Metal backend
     {
