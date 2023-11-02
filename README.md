@@ -1,9 +1,9 @@
 # fibs-sokol-test
 
-A small Fibs demo using the sokol headers, sokol-shdc for shader compilation and
-the STB headers.
+A small Fibs demo using the sokol and stb headers, sokol-shdc for shader compilation,
+and a build job to copy asset files.
 
-## Clone, Build and Run
+## Clone, Build and Run (macOS, Windows, Linux)
 
 First, install Deno: https://docs.deno.com/runtime/manual/getting_started/installation.
 
