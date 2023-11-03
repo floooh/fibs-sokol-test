@@ -1,5 +1,5 @@
-import * as fibs from 'https://deno.land/x/fibs@v1.5.0/mod.ts'
-//import * as fibs from "../fibs/mod.ts";
+//import * as fibs from 'https://deno.land/x/fibs@v1.6.0/mod.ts'
+import * as fibs from "../fibs/mod.ts";
 
 if (import.meta.main) fibs.main();
 
