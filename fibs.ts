@@ -1,4 +1,4 @@
-import * as fibs from 'https://deno.land/x/fibs@v1.4.0/mod.ts'
+import * as fibs from 'https://deno.land/x/fibs@v1.5.0/mod.ts'
 //import * as fibs from "../fibs/mod.ts";
 
 if (import.meta.main) fibs.main();
@@ -64,7 +64,7 @@ export const project: fibs.ProjectDesc = {
       name: "demo",
       type: "windowed-exe",
       dir: "src",
-      libs: () => ["sokol-config", "stb", "fileutil"],
+      deps: () => ["sokol-config", "stb", "fileutil"],
       sources: () => ["demo.c"],
       // sokol-shdc generates headers into the @targetbuild directory
       includeDirectories: { private: () => ["@targetbuild:"] },
