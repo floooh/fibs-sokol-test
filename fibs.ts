@@ -1,8 +1,38 @@
-import * as fibs from 'https://deno.land/x/fibs@v1.6.0/mod.ts'
-//import * as fibs from "../fibs/mod.ts";
+import {
+  Builder,
+  Configurer,
+  fibs,
+} from "https://raw.githubusercontent.com/floooh/fibs/master/index.ts";
+fibs(import.meta);
 
-if (import.meta.main) fibs.main();
+export function configure(c: Configurer) {
+  c.addImport({
+    name: "libs",
+    url: "https://github.com/floooh/fibs-libs",
+    files: ["sokol.ts", "stb.ts"],
+  });
+  c.addImport({
+    name: "platforms",
+    url: "https://github.com/floooh/fibs-platforms",
+    files: ["emscripten.ts"],
+  });
+  // FIXME
+  //c.addImport({
+  //  name: 'utils',
+  //  url: 'https://github.com/floooh/fibs-utils',
+  //  files: ['stdoptions.ts', 'sokolshdc.ts', 'copyfiles.ts'],
+  //});
+}
 
+export function build(b: Builder) {
+  b.addTarget("simple", "windowed-exe", (t) => {
+    t.setDir("src");
+    t.addSource("simple.c");
+    t.addDependencies(["sokol"]);
+  });
+}
+
+/*
 export const project: fibs.ProjectDesc = {
   name: "fibs-sokol-test",
 
@@ -91,3 +121,4 @@ export const project: fibs.ProjectDesc = {
     },
   ],
 };
+*/
