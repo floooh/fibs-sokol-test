@@ -31,7 +31,7 @@ export function build(b: Builder) {
   // complex demo with assets and shaders
   b.addTarget("demo", "windowed-exe", (t) => {
     t.setDir("src");
-    t.addSource("demo.c");
+    t.addSources(["demo.c", "demo.glsl"]);
     t.addDependencies(["sokol", "stb", "fileutil"]);
     t.addIncludeDirectories(["@targetbuild:"]); // needed for sokol-shdc output
     t.addJob({
