@@ -16,12 +16,11 @@ export function configure(c: Configurer) {
     url: "https://github.com/floooh/fibs-platforms",
     files: ["emscripten.ts"],
   });
-  // FIXME
-  //c.addImport({
-  //  name: 'utils',
-  //  url: 'https://github.com/floooh/fibs-utils',
-  //  files: ['stdoptions.ts', 'sokolshdc.ts', 'copyfiles.ts'],
-  //});
+  c.addImport({
+    name: 'utils',
+    url: 'https://github.com/floooh/fibs-utils',
+    files: ['stdoptions.ts' /*, 'sokolshdc.ts', 'copyfiles.ts' */],
+  });
 }
 
 export function build(b: Builder) {
