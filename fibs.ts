@@ -1,4 +1,4 @@
-import { Builder, Configurer, main, Platform } from 'https://raw.githubusercontent.com/floooh/fibs/master/index.ts';
+import { Builder, Configurer, main } from 'https://raw.githubusercontent.com/floooh/fibs/master/index.ts';
 main(import.meta);
 
 export function configure(c: Configurer) {
@@ -15,7 +15,8 @@ export function build(b: Builder) {
     t.addSources(['demo.c', 'demo.glsl']);
     t.addDependencies(['sokol', 'stb', 'fileutil']);
     t.addJob({ job: 'copyfiles', args: { srcDir: `${b.projectDir()}/assets`, files: ['baboon.png'] } });
-    t.addJob({ job: 'sokolshdc', args: { src: 'demo.glsl', outDir: shdcOutDir, slang: getSlang(b.platform()) }});
+    // NOTE: sokol-shdc slang is auto-selected
+    t.addJob({ job: 'sokolshdc', args: { src: 'demo.glsl', outDir: shdcOutDir }});
     t.addIncludeDirectories([shdcOutDir]);
   });
   b.addTarget('fileutil', 'lib', (t) => {
@@ -27,15 +28,4 @@ export function build(b: Builder) {
       t.addSource('fileutil.c');
     }
   });
-}
-
-function getSlang(platform: Platform): string {
-  switch (platform) {
-    case 'macos': return 'metal_macos';
-    case 'ios': return 'metal_ios';
-    case 'windows': return 'hlsl5';
-    case 'emscripten': return 'glsl300es';
-    case 'android': return 'glsl300es';
-    default: return 'glsl430';
-  }
 }
