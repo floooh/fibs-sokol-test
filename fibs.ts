@@ -10,7 +10,7 @@ export function configure(c: Configurer) {
 export function build(b: Builder) {
   b.addTarget({ name: 'simple', type: 'windowed-exe', sources: ['src/simple.c'], deps: ['sokol'] });
   b.addTarget('demo', 'windowed-exe', (t) => {
-    const shdcOutDir = b.targetBuildDir(t.name());
+    const shdcOutDir = t.buildDir();
     t.setDir('src');
     t.addSources(['demo.c', 'demo.glsl']);
     t.addDependencies(['sokol', 'stb', 'fileutil']);
