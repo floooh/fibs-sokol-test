@@ -17,6 +17,10 @@ export function configure(c: Configurer) {
     url: "https://github.com/floooh/fibs-utils",
     files: ["stdoptions.ts", "copyfiles.ts", "sokolshdc.ts"],
   });
+  c.addImport({
+    name: "dcimgui",
+    url: "https://github.com/floooh/dcimgui",
+  })
 }
 
 export function build(b: Builder) {
@@ -30,7 +34,7 @@ export function build(b: Builder) {
     const shdcOutDir = t.buildDir();
     t.setDir("src");
     t.addSources(["demo.c", "demo.glsl"]);
-    t.addDependencies(["sokol", "stb", "fileutil"]);
+    t.addDependencies(["sokol", "stb", "fileutil", "imgui"]);
     t.addProperties({
       MACOSX_BUNDLE_BUNDLE_NAME: "BLA",
       MACOSX_BUNDLE_BUNDLE_VERSION: "1.0",

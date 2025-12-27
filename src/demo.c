@@ -6,15 +6,20 @@
 #define VECMATH_GENERICS
 #define SOKOL_IMPL
 #define STB_IMAGE_IMPLEMENTATION
+#include "cimgui.h"
 #include "vecmath.h"
 #include "sokol_gfx.h"
 #include "sokol_app.h"
 #include "sokol_fetch.h"
 #include "sokol_log.h"
 #include "sokol_glue.h"
+#include "sokol_imgui.h"
+#include "sokol_gfx_imgui.h"
 #include "stb_image.h"
 #include "fileutil.h"
 #include "demo.glsl.h"
+
+#define SAMPLE_COUNT (4)
 
 static struct {
     float rx, ry;
@@ -33,9 +38,13 @@ static vs_params_t compute_vsparams(float rx, float ry);
 static void fetch_callback(const sfetch_response_t*);
 
 static void init(void) {
-    // setup sokol-gfx and the optional debug-ui
     sg_setup(&(sg_desc){
         .environment = sglue_environment(),
+        .logger.func = slog_func,
+    });
+    sgimgui_setup(&(sgimgui_desc_t){0});
+    simgui_setup(&(simgui_desc_t){
+        .sample_count = SAMPLE_COUNT,
         .logger.func = slog_func,
     });
 
@@ -160,6 +169,18 @@ static void frame(void) {
     // pump the sokol-fetch message queues, and invoke response callbacks
     sfetch_dowork();
 
+    // draw ui
+    simgui_new_frame(&(simgui_frame_desc_t){
+        .width = sapp_width(),
+        .height = sapp_height(),
+        .delta_time = sapp_frame_duration(),
+        .dpi_scale = sapp_dpi_scale()
+    });
+    if (igBeginMainMenuBar()) {
+        sgimgui_draw_menu("sokol-gfx");
+        igEndMainMenuBar();
+    }
+
     // compute model-view-projection matrix for vertex shader
     const float t = (float)(sapp_frame_duration() * 60.0);
     state.rx += 1.0f * t; state.ry += 2.0f * t;
@@ -170,13 +191,21 @@ static void frame(void) {
     sg_apply_bindings(&state.bind);
     sg_apply_uniforms(UB_vs_params, &SG_RANGE(vs_params));
     sg_draw(0, 36, 1);
+    sgimgui_draw();
+    simgui_render();
     sg_end_pass();
     sg_commit();
 }
 
 static void cleanup(void) {
     sfetch_shutdown();
+    simgui_shutdown();
+    sgimgui_shutdown();
     sg_shutdown();
+}
+
+static void input(const sapp_event* ev) {
+    simgui_handle_event(ev);
 }
 
 /* The fetch-callback is called by sokol_fetch.h when the data is loaded,
@@ -240,9 +269,10 @@ sapp_desc sokol_main(int argc, char* argv[]) {
         .init_cb = init,
         .frame_cb = frame,
         .cleanup_cb = cleanup,
+        .event_cb = input,
         .width = 800,
         .height = 600,
-        .sample_count = 4,
+        .sample_count = SAMPLE_COUNT,
         .window_title = "demo.c",
         .icon.sokol_default = true,
         .logger.func = slog_func,
