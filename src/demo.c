@@ -5,6 +5,7 @@
 //------------------------------------------------------------------------------
 #define VECMATH_GENERICS
 #define SOKOL_IMPL
+#define SOKOL_TRACE_HOOKS
 #define STB_IMAGE_IMPLEMENTATION
 #include "cimgui.h"
 #include "vecmath.h"
