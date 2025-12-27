@@ -1,9 +1,4 @@
-import {
-  Builder,
-  Configurer,
-  main,
-} from "https://raw.githubusercontent.com/floooh/fibs/master/index.ts";
-main(import.meta);
+import { Builder, Configurer } from "jsr:@floooh/fibs";
 
 export function configure(c: Configurer) {
   c.addImport({
@@ -35,6 +30,10 @@ export function build(b: Builder) {
     t.setDir("src");
     t.addSources(["demo.c", "demo.glsl"]);
     t.addDependencies(["sokol", "stb", "fileutil"]);
+    t.addProperties({
+      MACOSX_BUNDLE_BUNDLE_NAME: "BLA",
+      MACOSX_BUNDLE_BUNDLE_VERSION: "1.0",
+    });
     t.addJob({
       job: "copyfiles",
       args: { srcDir: `${b.projectDir()}/assets`, files: ["baboon.png"] },
