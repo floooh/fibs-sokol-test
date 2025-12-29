@@ -2,14 +2,14 @@
 import { Builder, Configurer } from "jsr:@floooh/fibs";
 
 export function configure(c: Configurer) {
-  c.addImportOptions(() => ({
+  c.addImportOptions({
     emscripten: {
       initialMemory: 8 * 1024 * 1024,
       stackSize: 64 * 1024,
       useLTO: false,
       useClosure: false,
     },
-  }));
+  });
   c.addImport({
     name: "libs",
     url: "https://github.com/floooh/fibs-libs",
