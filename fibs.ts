@@ -40,7 +40,7 @@ export function build(b: Builder) {
   b.addTarget("demo", "windowed-exe", (t) => {
     const shdcOutDir = t.buildDir();
     t.setDir("src");
-    t.addSources(["demo.c", "demo.glsl"]);
+    t.addSources(["demo.c", "demo.glsl", "vecmath.h"]);
     t.addDependencies(["sokol", "stb", "fileutil", "imgui"]);
     t.addProperties({
       MACOSX_BUNDLE_BUNDLE_NAME: "BLA",

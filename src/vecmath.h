@@ -992,7 +992,6 @@ typedef struct mat44_t { /* rows */ vec4_t x, y, z, w; } mat44_t;
 	#endif
 
 	#define _CRT_NONSTDC_NO_DEPRECATE 
-	#define _CRT_SECURE_NO_WARNINGS
 
 	// If we are running tests on windows
 	#if defined( VECMATH_RUN_TESTS ) && defined( VECMATH_USE_EXTERNAL_TESTFW ) && defined( _MSC_VER ) && !defined( __clang__ ) && !defined( __GNUC__ ) && !defined( __TINYC__ )
