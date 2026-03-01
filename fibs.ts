@@ -27,7 +27,7 @@ export function configure(c: Configurer) {
   c.addImport({
     name: "dcimgui",
     url: "https://github.com/floooh/dcimgui",
-  })
+  });
 }
 
 export function build(b: Builder) {
