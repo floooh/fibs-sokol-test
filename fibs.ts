@@ -17,7 +17,7 @@ export function configure(c: Configurer) {
   c.addImport({
     name: "platforms",
     url: "https://github.com/floooh/fibs-platforms",
-    files: ["emscripten.ts"],
+    files: ["emscripten.ts", "ios.ts"],
   });
   c.addImport({
     name: "utils",
@@ -42,10 +42,6 @@ export function build(b: Builder) {
     t.setDir("src");
     t.addSources(["demo.c", "demo.glsl", "vecmath.h"]);
     t.addDependencies(["sokol", "stb", "fileutil", "imgui"]);
-    t.addProperties({
-      MACOSX_BUNDLE_BUNDLE_NAME: "BLA",
-      MACOSX_BUNDLE_BUNDLE_VERSION: "1.0",
-    });
     t.addJob({
       job: "copyfiles",
       args: { srcDir: `${b.projectDir()}/assets`, files: ["baboon.png"] },
@@ -60,7 +56,7 @@ export function build(b: Builder) {
   b.addTarget("fileutil", "lib", (t) => {
     t.setDir("src");
     t.addSource("fileutil.h");
-    if (b.isMacOS()) {
+    if (b.isMacOS() || b.isIOS()) {
       t.addSource("fileutil_osx.m");
     } else {
       t.addSource("fileutil.c");
