@@ -10,19 +10,21 @@ export function configure(c: Configurer) {
     },
   });
   c.addImport({
+    name: "extras",
+    url: "https://github.com/floooh/fibs-extras",
+    files: [
+      "emscripten.ts",
+      "ios.ts",
+      "macos.ts",
+      "copyfiles.ts",
+      "sokolshdc.ts",
+      "stdoptions.ts",
+    ]
+  })
+  c.addImport({
     name: "libs",
     url: "https://github.com/floooh/fibs-libs",
     files: ["sokol.ts", "stb.ts"],
-  });
-  c.addImport({
-    name: "platforms",
-    url: "https://github.com/floooh/fibs-platforms",
-    files: ["emscripten.ts", "ios.ts"],
-  });
-  c.addImport({
-    name: "utils",
-    url: "https://github.com/floooh/fibs-utils",
-    files: ["stdoptions.ts", "copyfiles.ts", "sokolshdc.ts"],
   });
   c.addImport({
     name: "dcimgui",
