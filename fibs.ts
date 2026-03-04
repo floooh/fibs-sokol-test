@@ -19,6 +19,7 @@ export function configure(c: Configurer) {
       "copyfiles.ts",
       "sokolshdc.ts",
       "stdoptions.ts",
+      "linux-threads.ts",
     ]
   })
   c.addImport({
