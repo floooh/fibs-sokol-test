@@ -20,6 +20,7 @@ export function configure(c: Configurer) {
       "sokolshdc.ts",
       "stdoptions.ts",
       "linux-threads.ts",
+      "vscode.ts",
     ]
   })
   c.addImport({
