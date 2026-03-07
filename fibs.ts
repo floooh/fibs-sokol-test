@@ -16,6 +16,7 @@ export function configure(c: Configurer) {
       "emscripten.ts",
       "ios.ts",
       "macos.ts",
+      "windows.ts",
       "copyfiles.ts",
       "sokolshdc.ts",
       "stdoptions.ts",
